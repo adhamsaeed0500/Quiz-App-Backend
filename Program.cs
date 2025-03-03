@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using Quiz_App.Models;
+
 namespace Quiz_App
 {
     public class Program
@@ -13,6 +16,9 @@ namespace Quiz_App
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<ApplicationDbContext>(option =>
+            option.UseSqlServer(builder.Configuration.GetConnectionString("DC")));
 
             var app = builder.Build();
 
