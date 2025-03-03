@@ -31,6 +31,8 @@ namespace Quiz_App
             app.MapControllers();
 
             app.Run();
+
+            
         }
     }
 }
