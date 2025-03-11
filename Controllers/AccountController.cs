@@ -28,26 +28,20 @@ namespace Quiz_App.Controllers
                 return BadRequest(ModelState);
             }
 
-            if(model.Password != model.ConfirmPassword)
+            
+
+            var userExists = await _userManager.FindByEmailAsync(model.Email);
+
+            if(userExists != null)
             {
-
-                ModelState.AddModelError("ConfirmPassword", "The password and confirmation password do not match");
-                return BadRequest(ModelState);
-            }
-
-            var userEixst = await _userManager.FindByEmailAsync(model.Email);
-
-            if(userEixst != null)
-            {
-                return BadRequest("User Alreadsy Exist");
+                return BadRequest(new { error = "A user with this email already exists" });
             }
 
 
             var user = new ApplicationUser
             {
                 UserName = model.UserName,
-                Email = model.Email,
-                PasswordHash = model.Password
+                Email = model.Email,            
             };
                 
 
@@ -57,24 +51,14 @@ namespace Quiz_App.Controllers
             {
                 foreach(var err in result.Errors)
                 {
-                    ModelState.AddModelError(err.Code, err.Description);
+                    ModelState.AddModelError(string.Empty, err.Description);
                 }
                 return BadRequest(ModelState);           
             }      
-            return Ok("User created successfully");
-
-
-
-
-
-
-
-
-
-
-
-
+            return Ok(new { message = "User created successfully", userId = user.Id });
         }
+
+
         
 
     }
