@@ -1,10 +1,11 @@
-
+﻿
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Quiz_App.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Quiz_App.Services;
 
 namespace Quiz_App
 {
@@ -20,6 +21,7 @@ namespace Quiz_App
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped<AuthService>();
 
             builder.Services.AddDbContext<ApplicationDbContext>(option =>
             option.UseSqlServer(builder.Configuration.GetConnectionString("DC")));
@@ -33,9 +35,10 @@ namespace Quiz_App
             {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;
-                options.Password.RequiredUniqueChars = 5;             
+                options.Password.RequiredUniqueChars = 3;             
                 options.Password.RequireUppercase = false;
                 options.User.RequireUniqueEmail = true;
+                ;
             });
 
             builder.Services.AddAuthentication(option=>
@@ -60,6 +63,15 @@ namespace Quiz_App
                 
                 
                 );
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngularApp", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
 
             var app = builder.Build();
 
@@ -70,15 +82,13 @@ namespace Quiz_App
                 app.UseSwaggerUI();
             }
 
-            app.UseCors(options=>
-            options.WithOrigins("http://localhost:4200/")
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            );
+
+           
+            app.UseCors("AllowAngularApp");
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
