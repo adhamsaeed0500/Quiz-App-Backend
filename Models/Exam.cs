@@ -6,7 +6,7 @@
         public string Name { get; set; }
         public DateTime Puriod { get; set; }
 
-        public List<Questions> Questions { get;}
+        public List<Questions> Questions { get; set; }
 
     }
 }

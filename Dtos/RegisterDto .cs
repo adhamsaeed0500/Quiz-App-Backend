@@ -2,7 +2,7 @@
 
 namespace Quiz_App.Dtos
 {
-    public class RegisterModel
+    public class RegisterDto
     {
         [Required]
         public string UserName { get; set; }

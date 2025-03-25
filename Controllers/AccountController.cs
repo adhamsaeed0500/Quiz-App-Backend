@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.IdentityModel.Tokens;
 using Quiz_App.Dtos;
 using Quiz_App.Models;
-using Quiz_App.Services;
+using Quiz_App.Services.Account;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -35,14 +35,13 @@ namespace Quiz_App.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<IActionResult> Register([FromBody]RegisterModel model)
+        public async Task<IActionResult> Register([FromBody]RegisterDto model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            
+           
             // these will be handled in the configure service in program.cs
 
             //var userExists = await _userManager.FindByEmailAsync(model.Email);
@@ -52,14 +51,12 @@ namespace Quiz_App.Controllers
               //  return BadRequest(new { error = "A user with this email already exists" });
           //  }
 
-
             var user = new ApplicationUser
             {
                 UserName = model.UserName,
                 Email = model.Email,            
             };
                 
-
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if(!result.Succeeded)
@@ -72,11 +69,12 @@ namespace Quiz_App.Controllers
             }      
             return Ok(new { message = "User created successfully", userId = user.Id});
         }
+
         [HttpPost("Login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
 
             if (!ModelState.IsValid)
@@ -84,15 +82,12 @@ namespace Quiz_App.Controllers
                 return BadRequest(ModelState);
             }
 
-
             var userExists = await _userManager.FindByEmailAsync(model.Email);
-
             if (userExists == null && !await _userManager.CheckPasswordAsync(userExists,model.Password))
             {
                 return Unauthorized(new { message = "Invalid email or password" });           
                          
             }
-
 
             var token = await _authService.GenerateJwtToken(userExists);
 

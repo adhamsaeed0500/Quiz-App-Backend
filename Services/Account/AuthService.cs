@@ -1,18 +1,19 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Quiz_App.Models;
+using Quiz_App.Services.Account.IAccount;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Quiz_App.Services
+namespace Quiz_App.Services.Account
 {
-    public class AuthService:IAuthservice
+    public class AuthService : IAuthservice
     {
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
-       
+
 
 
 
@@ -24,26 +25,26 @@ namespace Quiz_App.Services
 
         public async Task<JwtSecurityToken> GenerateJwtToken(ApplicationUser user)
         {
-            
+
             var roles = await _userManager.GetRolesAsync(user);
 
-            
+
             var authClaims = new List<Claim>
     {
         new Claim(ClaimTypes.Name, user.UserName),
         new Claim(ClaimTypes.Email, user.Email),
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),   
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
     };
 
-            
+
             foreach (var role in roles)
             {
                 authClaims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            var  tokenExpiration = DateTime.Now.AddHours(Convert.ToDouble(_configuration["Jwt:ExpirationHours"] ?? "1"));
+            var tokenExpiration = DateTime.Now.AddHours(Convert.ToDouble(_configuration["Jwt:ExpirationHours"] ?? "1"));
 
             var token = new JwtSecurityToken(
                 issuer: _configuration["Jwt:Issuer"],

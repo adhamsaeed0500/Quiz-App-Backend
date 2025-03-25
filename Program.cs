@@ -5,7 +5,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Quiz_App.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Quiz_App.Services;
+using Quiz_App.Services.Account;
+using Quiz_App.Services.Exam;
+using Quiz_App.Services.Exams.IExamsServices;
+using Quiz_App.Repository.IRepostiroy;
+using Quiz_App.Repository;
 
 namespace Quiz_App
 {
@@ -22,6 +26,8 @@ namespace Quiz_App
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<AuthService>();
+            builder.Services.AddScoped<IExamsService , ExamsService>();
+            builder.Services.AddScoped<IExamsRepository, ExamsRepository>();
 
             builder.Services.AddDbContext<ApplicationDbContext>(option =>
             option.UseSqlServer(builder.Configuration.GetConnectionString("DC")));

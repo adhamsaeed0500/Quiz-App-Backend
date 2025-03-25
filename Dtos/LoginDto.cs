@@ -2,7 +2,7 @@
 
 namespace Quiz_App.Dtos
 {
-    public class LoginModel
+    public class LoginDto
     {
 
         [Required]
