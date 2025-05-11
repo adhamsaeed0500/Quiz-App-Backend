@@ -11,6 +11,8 @@ using Quiz_App.Services.Exams.IExamsServices;
 using Quiz_App.Repository.IRepostiroy;
 using Quiz_App.Repository;
 using Microsoft.OpenApi.Models;
+using Quiz_App.Services.Account.IAccount;
+using Quiz_App.Services.Email;
 
 namespace Quiz_App
 {
@@ -40,6 +42,7 @@ namespace Quiz_App
                     Type = SecuritySchemeType.ApiKey,
                     Scheme = "Bearer"
                 });
+
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -55,12 +58,17 @@ namespace Quiz_App
         }
     });
             });
+
+            builder.Services.AddEndpointsApiExplorer();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<AuthService>();
             builder.Services.AddScoped<IExamsService , ExamsService>();
             builder.Services.AddScoped<IExamsRepository, ExamsRepository>();
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
+            builder.Services.AddScoped<IPasswordResetTokenService, PasswordResetTokenService>();
 
             builder.Services.AddDbContext<ApplicationDbContext>(option =>
             option.UseSqlServer(builder.Configuration.GetConnectionString("DC")));
@@ -77,7 +85,7 @@ namespace Quiz_App
                 options.Password.RequiredUniqueChars = 3;             
                 options.Password.RequireUppercase = false;
                 options.User.RequireUniqueEmail = true;
-                ;
+                
             });
 
             builder.Services.AddAuthentication(option=>

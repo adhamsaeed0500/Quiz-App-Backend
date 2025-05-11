@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using Quiz_App.Dtos;
 using Quiz_App.Models;
 using Quiz_App.Services.Exams.IExamsServices;
+using System.ComponentModel.DataAnnotations;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Quiz_App.Controllers
@@ -56,6 +57,6 @@ namespace Quiz_App.Controllers
                 return NotFound();
             return Ok(exam);
         }
-
+     
     }
 }

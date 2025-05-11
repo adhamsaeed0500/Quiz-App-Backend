@@ -4,7 +4,7 @@ using Quiz_App.Repository.IRepostiroy;
 
 namespace Quiz_App.Repository
 {
-    public class ExamsRepository : IExamsRepository
+    public class ExamsRepository:IExamsRepository
     {
         private readonly ApplicationDbContext _context;
         public ExamsRepository(ApplicationDbContext context)
@@ -25,17 +25,16 @@ namespace Quiz_App.Repository
         //}
 
 
-        public async Task<Exam> GetExamByIdAsync(int id)
-        {
-            return await _context.Exams
-                .Include(x => x.Questions)
-                .FirstOrDefaultAsync(x => x.Id == id);
-        }
-
+        
         public async Task AddExamAsync(Exam exam)
         {
             await _context.Exams.AddAsync(exam);
             await _context.SaveChangesAsync();
+        }
+      
+        Task<Exam> IExamsRepository.GetExamByIdAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
