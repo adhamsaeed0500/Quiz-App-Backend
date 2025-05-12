@@ -13,6 +13,8 @@ using Quiz_App.Repository;
 using Microsoft.OpenApi.Models;
 using Quiz_App.Services.Account.IAccount;
 using Quiz_App.Services.Email;
+using System.Threading.RateLimiting;
+using System.Collections.Concurrent;
 
 namespace Quiz_App
 {
@@ -69,6 +71,18 @@ namespace Quiz_App
             builder.Services.AddScoped<IExamsRepository, ExamsRepository>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IPasswordResetTokenService, PasswordResetTokenService>();
+            builder.Services.AddRateLimiter(options =>
+            {
+                options.AddPolicy("ForgotPasswordPolicy", context =>
+                    RateLimitPartition.GetFixedWindowLimiter(
+                        partitionKey: context.User.Identity?.Name ?? context.Request.Headers["X-Forwarded-For"].ToString(),
+                        factory: partition => new FixedWindowRateLimiterOptions
+                        {
+                            AutoReplenishment = true,
+                            PermitLimit = 3,
+                            Window = TimeSpan.FromMinutes(15)
+                        }));
+            });
 
             builder.Services.AddDbContext<ApplicationDbContext>(option =>
             option.UseSqlServer(builder.Configuration.GetConnectionString("DC")));

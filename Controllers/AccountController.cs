@@ -109,7 +109,7 @@ namespace Quiz_App.Controllers
             });
         
         }
-
+        [EnableRateLimiting("ForgotPasswordPolicy")]
         [HttpPost("ForgetPassword")]
         public async Task<IActionResult> ForgetPassword([EmailAddress] [FromBody] [Required]  string Email)
         {
