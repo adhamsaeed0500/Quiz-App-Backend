@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ajds.ndjk\**" />
+    <Compile Remove="tessssstt\**" />
+    <EmbeddedResource Remove="ajds.ndjk\**" />
+    <EmbeddedResource Remove="tessssstt\**" />
+    <None Remove="ajds.ndjk\**" />
+    <None Remove="tessssstt\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Account.Application\Account.Application.csproj" />
+  </ItemGroup>
+
+</Project>

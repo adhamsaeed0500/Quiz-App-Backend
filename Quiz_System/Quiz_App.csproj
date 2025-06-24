@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\Account\Acccount.Infrastructure\Acccount.Infrastructure.csproj" />
+    <ProjectReference Include="..\src\Account\Account.API\Account.API.csproj" />
+    <ProjectReference Include="..\src\Account\Account.Application\Account.Application.csproj" />
+    <ProjectReference Include="..\src\Account\Account.Domain\Account.Domain.csproj" />
+    <ProjectReference Include="..\src\Exam\Exam.API\Exam.API.csproj" />
+    <ProjectReference Include="..\src\Exam\Exam.Application\Exam.Application.csproj" />
+    <ProjectReference Include="..\src\Exam\Exam.Domain\Exam.Domain.csproj" />
+    <ProjectReference Include="..\src\Exam\Exam.Infrastructure\Exam.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
