@@ -18,7 +18,7 @@ COPY src/Exam/Exam.Infrastructure/Exam.Infrastructure.csproj Exam.Infrastructure
 COPY Quiz_System/Quiz_App.csproj quiz_system/  
 
 # restore
-RUN dotnet restore 
+RUN dotnet restore Quiz_App.sln
 
 # نسخ باقي الملفات
 COPY . .
