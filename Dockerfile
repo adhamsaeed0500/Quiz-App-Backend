@@ -14,9 +14,7 @@ COPY Exam.API/Exam.API.csproj Exam.API/
 COPY Exam.Application/Exam.Application.csproj Exam.Application/
 COPY Exam.Domain/Exam.Domain.csproj Exam.Domain/
 COPY Exam.Infrastructure/Exam.Infrastructure.csproj Exam.Infrastructure/
-
 COPY SharedResult/SharedResult.csproj SharedResult/
-COPY SharedUtils/SharedUtils.csproj SharedUtils/
 
 # بعدين نعمل restore على الـ solution
 RUN dotnet restore Quiz_App.sln
