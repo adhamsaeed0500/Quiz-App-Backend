@@ -15,11 +15,11 @@ COPY src/Exam/Exam.Domain/Exam.Domain.csproj Exam.Domain/
 COPY src/Exam/Exam.Infrastructure/Exam.Infrastructure.csproj Exam.Infrastructure/
 
 # بعدين نعمل restore على الـ solution
-RUN dotnet restore Quiz_App.sln
+RUN dotnet restore 
 
 COPY . .
 
-RUN dotnet publish Quiz_App.sln -c Release -o /app1/out
+RUN dotnet publish -c Release -o /app1/out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app2
