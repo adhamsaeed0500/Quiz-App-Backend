@@ -18,7 +18,7 @@ COPY src/Exam/Exam.Infrastructure/Exam.Infrastructure.csproj Exam.Infrastructure
 COPY Quiz_System/Quiz_App.csproj quiz_system/  
 
 # restore
-RUN dotnet restore Quiz_App.sln
+RUN dotnet restore 
 
 # نسخ باقي الملفات
 COPY . .
@@ -31,4 +31,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/out .
 EXPOSE 80
-ENTRYPOINT ["dotnet", "quiz_system.dll"]  # ← غيّر الاسم لو الملف الناتج مختلف
+ENTRYPOINT ["dotnet", "Quiz_App.dll"]  # ← غيّر الاسم لو الملف الناتج مختلف
