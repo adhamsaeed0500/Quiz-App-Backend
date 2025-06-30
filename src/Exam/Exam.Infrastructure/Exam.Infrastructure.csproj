@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Resault\SharedResualt.csproj" />
+    <ProjectReference Include="..\..\Shared\Return.csproj" />
     <ProjectReference Include="..\Exam.Domain\Exam.Domain.csproj" />
   </ItemGroup>
 

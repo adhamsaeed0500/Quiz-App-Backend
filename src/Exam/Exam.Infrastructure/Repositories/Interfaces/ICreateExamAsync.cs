@@ -1,5 +1,5 @@
 ﻿using Exam.Domain.Entities;
-using SharedResault;
+using Return;
 
 namespace Exam.Infrastructure.Repositories.Interfaces
 {

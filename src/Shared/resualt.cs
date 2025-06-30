@@ -1,4 +1,4 @@
-﻿namespace SharedResault
+﻿namespace Return
 {
     public class Result
     {
