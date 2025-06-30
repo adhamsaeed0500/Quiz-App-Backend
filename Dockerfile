@@ -15,7 +15,7 @@ COPY src/Exam/Exam.Application/Exam.Application.csproj Exam.Application/
 COPY src/Exam/Exam.Domain/Exam.Domain.csproj Exam.Domain/
 COPY src/Exam/Exam.Infrastructure/Exam.Infrastructure.csproj Exam.Infrastructure/
 
-COPY quiz_system/quiz_system.csproj quiz_system/  
+COPY Quiz_System/Quiz_App.csproj quiz_system/  
 
 # restore
 RUN dotnet restore Quiz_App.sln
@@ -24,7 +24,7 @@ RUN dotnet restore Quiz_App.sln
 COPY . .
 
 # publish
-RUN dotnet publish quiz_system/quiz_system.csproj -c Release -o /app/out
+RUN dotnet publish Quiz_System/Quiz_App.csproj -c Release -o /app/out
 
 # runtime stage
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
