@@ -5,6 +5,7 @@ WORKDIR /app1
 # ننسخ فقط ملفات .csproj من مشاريع الـ Modules قبل restore
 COPY Quiz_App.sln .
 
+COPY Quiz_App/Quiz_App.csproj Quiz_App/
 COPY src/Account/Account.API/Account.API.csproj Account.API/
 COPY src/Account/Account.Application/Account.Application.csproj Account.Application/
 COPY src/Account/Account.Domain/Account.Domain.csproj Account.Domain/
@@ -20,10 +21,10 @@ RUN dotnet restore Quiz_App.sln
 
 COPY . .
 
-RUN dotnet publish Quiz_App.sln -c Release -o /app/out
+RUN dotnet publish Quiz_App.sln -c Release -o /app1/out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app2
-COPY --from=build /app/out .
+COPY --from=build /app1/out .
 EXPOSE 80
 ENTRYPOINT ["dotnet", "Account.API.dll"]  # ← غيّر الاسم لو Entry Point غير Account.API
