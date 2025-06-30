@@ -13,7 +13,7 @@ COPY src/Account/Acccount.Infrastructure/Acccount.Infrastructure.csproj Account.
 COPY src/Exam/Exam.API/Exam.API.csproj Exam.API/
 COPY src/Exam/Exam.Application/Exam.Application.csproj Exam.Application/
 COPY src/Exam/Exam.Domain/Exam.Domain.csproj Exam.Domain/
-COPY src/Exam/Exam.Ifrastructure/Exam.Infrastructure.csproj Exam.Domain/
+COPY src/Exam/Exam.Infrastructure/Exam.Infrastructure.csproj Exam.Infrastructure/
 
 # بعدين نعمل restore على الـ solution
 RUN dotnet restore Quiz_App.sln
