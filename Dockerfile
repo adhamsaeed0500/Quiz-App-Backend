@@ -15,7 +15,7 @@ COPY src/Exam/Exam.Application/Exam.Application.csproj Exam.Application/
 COPY src/Exam/Exam.Domain/Exam.Domain.csproj Exam.Domain/
 COPY src/Exam/Exam.Infrastructure/Exam.Infrastructure.csproj Exam.Infrastructure/
 
-COPY quiz_system/quiz_system.csproj quiz_system/  # ← لو عندك مشروع فعلي هنا بيحتوي على Program.cs
+COPY quiz_system/quiz_system.csproj quiz_system/  
 
 # restore
 RUN dotnet restore Quiz_App.sln
