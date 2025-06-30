@@ -8,7 +8,7 @@ COPY Quiz_App.sln .
 COPY src/Account/Account.API/Account.API.csproj Account.API/
 COPY src/Account/Account.Application/Account.Application.csproj Account.Application/
 COPY src/Account/Account.Domain/Account.Domain.csproj Account.Domain/
-COPY src/Account/Account.Infrastructure/Account.Infrastructure.csproj Account.Infrastructure/
+COPY src/Account/Acccount.Infrastructure/Acccount.Infrastructure.csproj Account.Infrastructure/
 
 COPY src/Exam/Exam.API/Exam.API.csproj Exam.API/
 COPY src/Exam/Exam.Application/Exam.Application.csproj Exam.Application/
