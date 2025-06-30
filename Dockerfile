@@ -3,9 +3,7 @@
 WORKDIR /app1
 
 # ننسخ فقط ملفات .csproj من مشاريع الـ Modules قبل restore
-COPY Quiz_App.sln .
 
-COPY Quiz_App/Quiz_App.csproj Quiz_App/
 COPY src/Account/Account.API/Account.API.csproj Account.API/
 COPY src/Account/Account.Application/Account.Application.csproj Account.Application/
 COPY src/Account/Account.Domain/Account.Domain.csproj Account.Domain/
