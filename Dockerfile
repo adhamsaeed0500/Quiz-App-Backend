@@ -18,7 +18,7 @@ COPY src/Exam/Exam.Infrastructure/Exam.Infrastructure.csproj Exam.Infrastructure
 COPY Quiz_System/Quiz_App.csproj quiz_system/  
 
 # restore
-RUN dotnet restore Quiz_App.sln
+RUN ls -la && dotnet restore Quiz_App.sln --verbosity detailed
 
 # نسخ باقي الملفات
 COPY . .
