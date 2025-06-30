@@ -3,7 +3,6 @@
 using Exam.Domain.Entities;
 using Exam.Infrastructure.dbcontext;
 using Exam.Infrastructure.Repositories.Interfaces;
-using SharedResault;
 
 namespace Exam.Infrastructure.Repositories
 {
@@ -15,17 +14,17 @@ namespace Exam.Infrastructure.Repositories
             _dbcontext = examDbContext;
         }
 
-        public async Task<Result> CreateExamAsync(ExamEntity exam)
+        public async Task<string> CreateExamAsync(ExamEntity exam)
         {
             try
             {
                 await _dbcontext.Exams.AddAsync(exam);
                 await _dbcontext.SaveChangesAsync();
-                return Result.Success();
+                return "Exam created successfully";
             }
             catch (Exception ex)
             {
-                return Result.Failure("Unexpected error occurred");
+                return ex.Message;
             }
         }
 
