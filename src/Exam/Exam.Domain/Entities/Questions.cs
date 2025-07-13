@@ -10,13 +10,13 @@ namespace Exam.Domain.Entities
         public string Question { get; set; }
         public string QuestionType { get; set; }
 
-        public string choiceA { get; set; }
+        public string answerA { get; set; }
 
-        public string? choiceB { get; set; } 
-        public string? choiceC { get; set; } 
-        public string? choiceD { get; set; } 
+        public string? answerB { get; set; } 
+        public string? answerC { get; set; } 
+        public string? answerD { get; set; } 
 
-        public bool? IsCorrect { get; set; }
+        public string IsCorrect { get; set; }
         [ForeignKey(nameof(Exam))]
         public int ExamId { get; set; }
         public ExamEntity Exam { get; set; }

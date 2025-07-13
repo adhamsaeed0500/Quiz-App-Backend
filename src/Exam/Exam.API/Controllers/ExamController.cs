@@ -26,7 +26,10 @@ namespace Exam.API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
         public async Task<IActionResult> Exam([FromBody]CreateExamDto examModel)
-        {          
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); 
+
             try
             {
             var createdExam = await _examsService.CreateExamAsync(examModel);

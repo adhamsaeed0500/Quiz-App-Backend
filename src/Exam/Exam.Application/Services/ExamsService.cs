@@ -19,16 +19,16 @@ namespace Exam.Application.Services
             var exam = new ExamEntity
             {
                 Name = examDto.examName,
-                Puriod = examDto.Period,
+                Period = examDto.Period,
                 Questions = examDto.questions.Select(q => new Questions
                 {
                     Question = q.QuestionText,
-                    QuestionType = q.QuestionType.ToString(),
+                    QuestionType = q.QuestionType,
                     IsCorrect = q.IsCorrect,
-                    choiceA = q.ChoiceA,
-                    choiceB = q.ChoiceB,
-                    choiceC = q.ChoiceC,
-                    choiceD = q.ChoiceD,    
+                    answerA = q.answerA,
+                    answerB = q.answerB,
+                    answerC = q.answerC,
+                    answerD = q.answerD,    
                 }
                 ).ToList()
             };

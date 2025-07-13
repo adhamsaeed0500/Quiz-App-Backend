@@ -9,11 +9,11 @@ namespace Exam.Application.DTOs
         [Required]
         [StringLength(150,MinimumLength = 5)]
         public string QuestionText { get; set; }
-        public QuestionType QuestionType { get; set; }
-        public string ChoiceA { get; set; }
-        public string? ChoiceB { get; set; }
-        public string? ChoiceC { get; set; }
-        public string? ChoiceD { get; set; }
-        public bool? IsCorrect { get; set; }
+        public string QuestionType { get; set; }
+        public string answerA { get; set; }
+        public string? answerB { get; set; }
+        public string? answerC { get; set; }
+        public string? answerD { get; set; }
+        public string IsCorrect { get; set; }
     }
 }
